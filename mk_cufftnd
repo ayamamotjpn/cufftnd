@@ -1,0 +1,43 @@
+SDIR = ./
+
+#SMS ?= 20 30 35 37 50 52 60
+sm = 60
+SM = sm_$(sm)
+
+CC = nvcc
+
+INC = -I/usr/local/cuda/include
+LIB = -L/usr/local/cuda/lib64 -lcufft -lcudart -lcublas -lfftw3 -lfftw3f
+#CCOPT = -c -arch=$(SM) -Xcompiler -std=c++98 --compiler-options '-fPIC'
+CCOPT = -c -arch=$(SM) -Xcompiler -fPIC $(INC)
+
+CUDAINC = /usr/local/cuda/include
+CUDALIB = /usr/local/cuda/lib64
+
+all : cufftnd_tst libcufftnd.so
+
+cufftnd_tst : cufftnd.o fftwnd.o cufftnd_tst.o
+	$(CC) cufftnd.o fftwnd.o cufftnd_tst.o $(LIB) -o cufftnd_tst
+
+cufftnd_tst.o : $(SDIR)cufftnd_tst.c
+	$(CC) $(CCOPT) $(SDIR)cufftnd_tst.c -o cufftnd_tst.o
+	
+cufftnd.o : $(SDIR)cufftnd.cu
+	$(CC) $(CCOPT) $(SDIR)cufftnd.cu -o cufftnd.o
+
+fftwnd.o : $(SDIR)fftwnd.c
+	$(CC) $(CCOPT) $(SDIR)fftwnd.c -o fftwnd.o
+	
+cufftnd_.o : $(SDIR)cufftnd_.c
+	$(CC) $(CCOPT) $(SDIR)cufftnd_.c -o cufftnd_.o
+
+libcufftnd.so : cufftnd.o cufftnd_.o
+	$(CC) -shared cufftnd.o cufftnd_.o -o libcufftnd.so
+	
+install :	
+	cp libcufftnd.so $(CUDALIB)
+	cp cufftnd.h $(CUDAINC)
+	
+clean :
+	rm -f cufftnd_tst cufftnd_tst.o cufftnd.o fftwnd.o cufftnd_.o libcufftnd.so
+	

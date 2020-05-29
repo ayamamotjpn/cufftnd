@@ -1,1 +1,15 @@
+For building libcufftnd.so use the following command
 
+make -f mk_cufftnd
+
+For installing libcufftnd.so use
+
+make -f mk_cufftnd install
+
+For changing default install-dir (/usr/local/cuda) edit
+CUDAINC CUDALIB lines in mk_cufftnd
+
+
+prerequisite:
+
+cudatoolkit
