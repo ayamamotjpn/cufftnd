@@ -4,7 +4,10 @@ SDIR = ./
 sm = 60
 SM = sm_$(sm)
 
-CC = nvcc
+# for gcc ver. 12
+#CC = nvcc -allow-unsupported-compiler
+# for gcc ver. 11 10 etc.
+CC = nvcc 
 
 INC = -I/usr/local/cuda/include
 LIB = -L/usr/local/cuda/lib64 -lcufft -lcudart -lcublas -lfftw3 -lfftw3f
