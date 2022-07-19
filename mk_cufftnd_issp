@@ -4,7 +4,7 @@ SDIR = ./
 #sm = 60
 sm = 80
 SM = sm_$(sm)
-HOME = /home/k0609/k06091
+HOME = /home/k0609/k060901
 CUDAVER = 11.6
 MKLROOT = /home/app/oneapi/mkl/2022.1.0
 # for gcc ver. 12
