@@ -5,7 +5,7 @@ sm = 60
 SM = sm_$(sm)
 
 CC = nvcc 
-CUDAVER = 11.7
+CUDAVER = 11.6
 
 INC = -I$(HOME)/local/cuda-$(CUDAVER)/include
 LIB = -L$(HOME)/local/cuda-$(CUDAVER)/lib64 -lcufft -lcudart -lcublas -lfftw3 -lfftw3f
