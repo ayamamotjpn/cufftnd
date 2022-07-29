@@ -4,14 +4,15 @@ SDIR = ./
 #sm = 60
 sm = 80
 SM = sm_$(sm)
-HOME = /home/k0609/k060901
-CUDAVER = 11.6
+
+#CUDAVER = 11.6
+CUDAVER = 11.7
 MKLROOT = /home/app/oneapi/mkl/2022.1.0
-# for gcc ver. 12
-#CC = nvcc -allow-unsupported-compiler
+
 # for gcc ver. 11 10 etc.
-#iCC = nvcc 
-CC = /home/app/hpc_sdk/Linux_x86_64/22.2/compilers/bin/nvcc
+#CC = nvcc 
+#CC = /home/app/hpc_sdk/Linux_x86_64/22.7/compilers/bin/nvcc
+CC = $(HOME)/local/cuda-$(CUDAVER)/bin/nvcc
 
 INC = -I$(HOME)/cuda-$(CUDAVER)/include -I$(MKLROOT)/include/fftw
 LIB = -L$(HOME)/cuda-$(CUDAVER)/lib -L$(MKLROOT)/lib/intel64 -lcufft \
