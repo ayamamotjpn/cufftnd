@@ -1,16 +1,15 @@
 SDIR = ./
 
-#SMS ?= 20 30 35 37 50 52 60
+# sm is 60 for Pascal, 70 for Volta 75 for Turing 80 for Ampere
 sm = 60
 SM = sm_$(sm)
 
-# for gcc ver. 12
-#CC = nvcc -allow-unsupported-compiler
-# for gcc ver. 11 10 etc.
 CC = nvcc 
+CUDAVER = 11.7
 
-INC = -I/usr/local/cuda/include
-LIB = -L/usr/local/cuda/lib64 -lcufft -lcudart -lcublas -lfftw3 -lfftw3f
+INC = -I$(HOME)/local/cuda-$(CUDAVER)/include
+LIB = -L$(HOME)/local/cuda-$(CUDAVER)/lib64 -lcufft -lcudart -lcublas -lfftw3 -lfftw3f
+
 #CCOPT = -c -arch=$(SM) -Xcompiler -std=c++98 --compiler-options '-fPIC'
 CCOPT = -c -arch=$(SM) -Xcompiler -fPIC $(INC)
 
